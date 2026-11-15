@@ -11,3 +11,4 @@ tools/.cache/
 *.log
 .vitest/
 .playwright-profile/
+docs/demo/raw/

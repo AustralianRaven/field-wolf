@@ -52,6 +52,8 @@ export interface Ranking {
   familiesSearched: string[];
 }
 
+/** How many families' species are scored. Measured on the test photos: 20 finds every one, 5 and 10 miss some. */
+export const SEARCH_FAMILIES = 20;
 export const LOGIT_SCALE = 100;
 /** A species answer needs both: the photo really looks like the name, and it beats the rest. */
 export const MIN_COSINE = 0.72;
@@ -126,7 +128,7 @@ export async function rank(opts: {
   const { feature, families, familyTable, loadShard, mask } = opts;
   const allowed = opts.allowedFamilies ?? familiesInMask(families, mask);
   const famCos = cosines(feature, familyTable, (r) => allowed[r] === 1);
-  const picked = topIndices(famCos, opts.searchFamilies ?? 5);
+  const picked = topIndices(famCos, opts.searchFamilies ?? SEARCH_FAMILIES);
 
   const shards = await Promise.all(picked.map((f) => loadShard(f)));
   const cands: Omit<Guess, 'score'>[] = [];

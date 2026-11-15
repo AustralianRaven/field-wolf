@@ -19,12 +19,12 @@ import { encodeIndices } from '../src/lib/varint.ts';
 const [key, template = 'tax', familyMode = 'text', outArg] = process.argv.slice(2);
 if (!key) throw new Error('usage: node pack.mjs <fauna|flora> [template] [familyMode] [outDir]');
 const subset = process.env.FW_SUBSET ? new Set(JSON.parse(readFileSync(process.env.FW_SUBSET, 'utf8'))) : null;
-const list = JSON.parse(readFileSync(join(CACHE, `list-${key}.json`), 'utf8')).filter((r) => !subset || subset.has(r.family));
+const fullList = JSON.parse(readFileSync(join(CACHE, `list-${key}.json`), 'utf8')).filter((r) => !subset || subset.has(r.family));
 const embDir = join(CACHE, 'emb', `${key}-${template}${subset ? '-subset' : ''}`);
 const out = outArg ?? join(PUBLIC_DATA, key);
 
 const chunks = readdirSync(embDir).filter((f) => /^\d{4}\.f32$/.test(f)).sort();
-const emb = new Float32Array(list.length * DIM);
+const emb = new Float32Array(fullList.length * DIM);
 let at = 0;
 for (const c of chunks) {
   const b = readFileSync(join(embDir, c));
@@ -32,8 +32,16 @@ for (const c of chunks) {
   emb.set(f, at);
   at += f.length;
 }
-if (at !== emb.length) throw new Error(`Embedded ${at / DIM} rows for ${list.length} species: run embed.mjs to finish`);
-const row = (i) => emb.subarray(i * DIM, (i + 1) * DIM);
+if (at !== emb.length) throw new Error(`Embedded ${at / DIM} rows for ${fullList.length} species: run embed.mjs to finish`);
+const allRow = (i) => emb.subarray(i * DIM, (i + 1) * DIM);
+
+// Hybrids ("Pavo cristatus × muticus") always look like their parents and would steal
+// their answers; nobody photographs one expecting that name. Drop them here.
+const keep = [];
+for (let i = 0; i < fullList.length; i++) if (!fullList[i].sci.includes('×')) keep.push(i);
+const list = keep.map((i) => fullList[i]);
+const row = (i) => allRow(keep[i]);
+console.log(`${key}: dropped ${fullList.length - list.length} hybrids`);
 
 // Families, in list order (build-list sorted species so each family is contiguous).
 const families = [];
@@ -45,9 +53,14 @@ for (let i = 0; i < list.length; i++) {
 }
 const famText = readFileSync(join(embDir, 'families.f32'));
 const famTextF = new Float32Array(famText.buffer, famText.byteOffset, famText.byteLength / 4);
-if (famTextF.length !== families.length * DIM) throw new Error('families.f32 does not match the family list');
-const famRows = families.map((f, k) => {
-  const text = famTextF.subarray(k * DIM, (k + 1) * DIM);
+// embed.mjs wrote one text row per distinct family name, in first-seen order. A few names
+// are homonyms in different orders, so look rows up by name rather than position.
+const textIndex = new Map();
+for (const r of fullList) if (!textIndex.has(r.family)) textIndex.set(r.family, textIndex.size);
+if (famTextF.length !== textIndex.size * DIM) throw new Error('families.f32 does not match the family list: re-run embed.mjs');
+const famRows = families.map((f) => {
+  const t = textIndex.get(f.name);
+  const text = famTextF.subarray(t * DIM, (t + 1) * DIM);
   if (familyMode === 'text') return text;
   const m = new Float32Array(DIM);
   for (let i = f.offset; i < f.offset + f.count; i++) { const v = row(i); for (let d = 0; d < DIM; d++) m[d] += v[d]; }

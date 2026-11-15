@@ -8,14 +8,14 @@ FieldWolf names the plant or animal in a photo, entirely in your browser. Pick *
 
 ## What it knows
 
-Every species with at least one research-grade observation on [iNaturalist](https://www.inaturalist.org): about 302,000 animals and 163,000 plants. A research-grade observation is a dated, located photo that the community agrees on, so nearly anything someone has photographed is in the list. The app's **Species list** page lets you search all of them.
+Every species with at least one research-grade observation on [iNaturalist](https://www.inaturalist.org): 301,516 animals and 160,664 plants (hybrids left out). A research-grade observation is a dated, located photo that the community agrees on, so nearly anything someone has photographed is in the list. The app's **Species list** page lets you search all of them.
 
 ## How it works
 
 1. **The model.** [BioCLIP 2](https://huggingface.co/imageomics/bioclip-2), a CLIP-style model trained on photos of living things, 8-bit quantised ([mahan-ym/bioclip-2-quantized](https://huggingface.co/mahan-ym/bioclip-2-quantized), MIT, about 290 MB). `/setup` downloads it once into the browser's Cache API.
 2. **The photo.** The boxed area (or the whole photo) is resized to 224 × 224 and turned into a 768-number fingerprint by ONNX Runtime Web, in a Web Worker, on one CPU thread. That takes a few seconds on a laptop.
-3. **Family first.** The fingerprint is compared with one fingerprint per family (about 5,000 animal families and 860 plant families). Each family's fingerprint is the average of its species' fingerprints.
-4. **Then species.** Only the five best families' species are fetched (one small file each, cached) and ranked. When a region is set, species not recorded in that continent or country are removed before ranking.
+3. **Family first.** The fingerprint is compared with one fingerprint per family (5,062 animal families and 861 plant families). Each family's fingerprint is the average of its species' fingerprints.
+4. **Then species.** Only the 20 best families' species are fetched (one small file each, cached) and ranked. When a region is set, species not recorded in that continent or country are removed before ranking.
 5. **Honest answers.** A species is "Confident" only when the photo really looks like the name (cosine ≥ 0.72) and it takes at least 80% of the probability. Otherwise the answer falls back to the genus or family that holds most of it, or says "Not sure".
 
 Species fingerprints come from BioCLIP 2's text encoder, run offline over each species' taxonomy and common name, for example `a photo of Animalia Chordata Aves Coraciiformes Alcedinidae Dacelo novaeguineae with common name Laughing Kookaburra.`
@@ -31,7 +31,7 @@ npx playwright test  # end-to-end, local only (see below)
 
 ### End-to-end tests (local only)
 
-Playwright runs the production build with the real model. It identifies 10 animals and 10 plants from every continent (`e2e/identify.spec.ts`), and exercises setup, the box, the region filter and the species list. Run `cd tools && npm install && npm run fetch-models` first, so the tests serve the model from disk instead of downloading it per test. These tests are deliberately not in GitHub Actions: they need the 290 MB model and take minutes.
+Playwright runs the production build with the real model. It identifies 10 animals and 10 plants from every continent (`e2e/identify.spec.ts`; 18 named first, all 20 among the names shown, see [DEMO.md](DEMO.md#how-accurate-is-it)), and exercises setup, the box, the region filter and the species list. Run `cd tools && npm install && npm run fetch-models` first, so the tests serve the model from disk instead of downloading it per test. These tests are deliberately not in GitHub Actions: they need the 290 MB model and take minutes.
 
 `npx playwright test --project=demo` records the walkthrough video used in [DEMO.md](DEMO.md).
 

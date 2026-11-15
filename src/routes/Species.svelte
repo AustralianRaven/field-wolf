@@ -2,6 +2,7 @@
   /** Every supported species: searchable, and browsable by class and family. */
   import { KINGDOMS, type Kingdom } from '../lib/config';
   import { loadFamilies, loadMeta, loadNames, loadShardRows, type Meta } from '../lib/data';
+  import { displayName } from '../lib/names';
   import type { Family, SpeciesRow } from '../lib/rank';
 
   let kingdom = $state<Kingdom>('fauna');
@@ -123,7 +124,7 @@
       {:else}
         <ul class="list">
           {#each matches as m (m.sci)}
-            <li><span class="c name">{m.common ?? m.sci}</span><span class="s sci">{m.sci}</span><span class="f">{m.family}</span></li>
+            <li><span class="c name">{displayName(m.common, m.sci)}</span><span class="s sci">{m.sci}</span><span class="f">{m.family}</span></li>
           {/each}
         </ul>
         {#if matches.length === 100}<p class="muted">Showing the first 100 matches. Type more to narrow it down.</p>{/if}
@@ -144,7 +145,7 @@
                   <ul class="list inner">
                     {#each familyRows as [sci, common, id] (id)}
                       <li>
-                        <a class="c name" href="https://www.inaturalist.org/taxa/{id}" target="_blank" rel="noreferrer">{common ?? sci}</a>
+                        <a class="c name" href="https://www.inaturalist.org/taxa/{id}" target="_blank" rel="noreferrer">{displayName(common, sci)}</a>
                         <span class="s sci">{sci}</span>
                       </li>
                     {/each}

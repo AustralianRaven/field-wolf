@@ -2,6 +2,7 @@
   /** The facing page: the name, its proof crop, an honest confidence, and the runners-up. */
   import type { AnalyserState } from '../lib/analyser.svelte';
   import type { Guess, Ranking } from '../lib/rank';
+  import { displayName } from '../lib/names';
   import { cropRect, type Box } from '../lib/region';
 
   interface Props {
@@ -70,7 +71,7 @@
       <p>Looking through every {noun} family. The first photo takes longest while the model loads.</p>
     </div>
   {:else if ranking && top && verdict}
-    <div class="result" class:stale={status === 'working'} data-testid="result" data-top={top.scientific}>
+    <div class="result" class:stale={status === 'working'} data-testid="result" data-top={top.scientific} data-shown={ranking.guesses.map((g) => g.scientific).join('|')}>
       <p class="run" aria-label="Classification">
         <span>{top.class}</span><em aria-hidden="true">›</em><span>{top.order}</span><em aria-hidden="true">›</em><span>{top.family}</span><em aria-hidden="true">›</em><span class="sci">{top.genus}</span>
       </p>
@@ -82,14 +83,14 @@
         </figure>
         <div class="names" bind:this={nameEl}>
           {#if verdict.level === 'species'}
-            <h2 class="common name" data-testid="answer">{top.common ?? top.scientific}</h2>
+            <h2 class="common name" data-testid="answer">{displayName(top.common, top.scientific)}</h2>
             <p class="latin sci">{top.scientific}</p>
           {:else if verdict.level === 'genus'}
             <h2 class="common name" data-testid="answer">A kind of <span class="sci">{verdict.name}</span></h2>
-            <p class="latin">Most likely <span class="sci">{top.scientific}</span>{top.common ? ` (${top.common})` : ''}</p>
+            <p class="latin">Most likely <span class="sci">{top.scientific}</span>{top.common ? ` (${displayName(top.common, top.scientific)})` : ''}</p>
           {:else if verdict.level === 'family'}
             <h2 class="common name" data-testid="answer">Something in the family {verdict.name}</h2>
-            <p class="latin">Closest: <span class="sci">{top.scientific}</span>{top.common ? ` (${top.common})` : ''}</p>
+            <p class="latin">Closest: <span class="sci">{top.scientific}</span>{top.common ? ` (${displayName(top.common, top.scientific)})` : ''}</p>
           {:else}
             <h2 class="common name" data-testid="answer">Not sure</h2>
             <p class="latin">The closest names are below, but none is a convincing match.</p>
@@ -113,7 +114,7 @@
             <li>
               <span class="n name">{i + 2}</span>
               <span class="who">
-                <a class="c name" href={inat(g)} target="_blank" rel="noreferrer">{g.common ?? g.scientific}</a>
+                <a class="c name" href={inat(g)} target="_blank" rel="noreferrer">{displayName(g.common, g.scientific)}</a>
                 <span class="s sci">{g.scientific}</span>
               </span>
               <span class="ramp small" aria-hidden="true">{#each [1, 2, 3, 4, 5] as k (k)}<i class:f={k <= steps(g.score)}></i>{/each}</span>

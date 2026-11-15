@@ -12,7 +12,7 @@ import { readTable } from '../src/lib/table.ts';
 import { decodeIndices, maskOf } from '../src/lib/varint.ts';
 
 const dataDir = process.argv[2] ?? PUBLIC_DATA;
-const searchFamilies = Number(process.argv[3] ?? 5);
+const searchFamilies = Number(process.argv[3] ?? 20);
 const photosDir = join(REPO, 'e2e', 'fixtures', 'photos');
 const photos = JSON.parse(readFileSync(join(photosDir, 'photos.json'), 'utf8'));
 const CONT = { Africa: 97392, Antarctica: 97390, Asia: 97395, Europe: 97391, 'North America': 97394, Oceania: 97393, 'South America': 97389 };
@@ -50,7 +50,8 @@ for (const p of photos) {
     const mask = where === 'Everywhere' ? null : k.mask(CONT[where]);
     if (where !== 'Everywhere' && !mask) continue;
     const r = await rank({ feature, families: k.families, familyTable: k.familyTable, loadShard: k.loadShard, mask, searchFamilies });
-    const pos = r.guesses.findIndex((g) => g.scientific === p.scientific || g.scientific.startsWith(p.scientific + ' '));
+    // The species itself or one of its subspecies; never a hybrid ("Pavo cristatus × muticus").
+    const pos = r.guesses.findIndex((g) => g.scientific === p.scientific || (g.scientific.startsWith(p.scientific + ' ') && !g.scientific.includes('×')));
     if (pos < 0) misses++;
     if (pos === 0 && where === 'Everywhere') top1++;
     const g = r.guesses[0];
