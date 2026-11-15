@@ -12,10 +12,12 @@
     noun: string;
     onFile: (file: File) => void;
     onBox: (box: Box | null, final: boolean) => void;
-    /** Where leader lines start: the box, or the whole photo when there is none. */
+    /** True once a result exists: with no box, the whole photo is framed as the analysed area. */
+    analysed?: boolean;
+    /** Where leader lines start: the drawn box, or the whole-photo frame. */
     anchor?: HTMLElement | null;
   }
-  let { photoUrl, box, noun, onFile, onBox, anchor = $bindable(null) }: Props = $props();
+  let { photoUrl, box, noun, onFile, onBox, analysed = false, anchor = $bindable(null) }: Props = $props();
   let boxNode = $state<HTMLElement | null>(null);
   let stageNode = $state<HTMLElement | null>(null);
   $effect(() => {
@@ -84,12 +86,14 @@
         <img bind:this={img} src={photoUrl} alt="" draggable="false" />
         {#if shown}
           <span class="box" bind:this={boxNode} style={boxStyle(shown)}><i class="h tl"></i><i class="h br"></i></span>
+        {:else if analysed}
+          <span class="box whole" bind:this={boxNode}></span>
         {/if}
       </div>
     </div>
     <p class="cap">
       <span><b class="name">Plate 1</b> · your photo</span>
-      <span>{shown ? 'Only the boxed area is analysed. Drag again to redraw it.' : `Drag on the photo to box the ${noun}, or analyse the whole photo.`}</span>
+      <span>{shown ? 'Only the boxed area is analysed. Drag again to redraw it.' : analysed ? `The whole photo was analysed. Drag to box just the ${noun}.` : `Drag on the photo to box the ${noun}, or leave it to analyse the whole photo.`}</span>
     </p>
   {:else}
     <div
@@ -150,6 +154,10 @@
     position: relative;
     overflow: hidden;
   }
+  .box.whole {
+    inset: 0;
+    box-shadow: inset 0 0 0 1px rgb(28 23 38 / 35%);
+  }
   .h {
     position: absolute;
     width: 9px;
@@ -172,6 +180,13 @@
     margin-top: 14px;
     font-size: 13px;
     color: var(--muted);
+  }
+  .cap span:first-child {
+    flex: none;
+    white-space: nowrap;
+  }
+  .cap span:last-child {
+    text-align: right;
   }
   .cap b {
     font-weight: 600;

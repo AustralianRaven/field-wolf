@@ -22,7 +22,7 @@ import { decodeIndices, maskOf } from '../varint';
 export type WorkerIn =
   | { type: 'model'; blob: Blob }
   | { type: 'init'; kingdom: Kingdom }
-  | { type: 'identify'; id: number; kingdom: Kingdom; photo: Blob; box: Box | null; region: number | null };
+  | { type: 'identify'; id: number; kingdom: Kingdom; photo: Blob; box: Box | null; region: number | null; featureKey: string };
 
 export type WorkerOut =
   | { type: 'ready'; kingdom: Kingdom; count: number }
@@ -42,6 +42,8 @@ interface Loaded {
 }
 
 let session: Promise<ort.InferenceSession> | null = null;
+/** The last photo fingerprint: a region change re-ranks without running the model again. */
+let lastFeature: { key: string; feature: Float32Array } | null = null;
 /** The model when the browser could not store it: sent by the page, kept for this tab. */
 let sessionModel: Blob | null = null;
 const kingdoms = new Map<Kingdom, Promise<Loaded>>();
@@ -133,12 +135,18 @@ async function preprocess(photo: Blob, box: Box | null): Promise<ort.Tensor> {
 async function identify(msg: Extract<WorkerIn, { type: 'identify' }>): Promise<void> {
   const t0 = performance.now();
   const [sess, l] = await Promise.all([getSession(), getKingdom(msg.kingdom)]);
-  const out = await sess.run({ image: await preprocess(msg.photo, msg.box) });
-  const feat = out.image_features?.data as Float32Array | undefined;
-  if (!feat) throw new Error('The model returned no features.');
+  let feature: Float32Array;
+  if (lastFeature?.key === msg.featureKey) feature = lastFeature.feature;
+  else {
+    const out = await sess.run({ image: await preprocess(msg.photo, msg.box) });
+    const feat = out.image_features?.data as Float32Array | undefined;
+    if (!feat) throw new Error('The model returned no features.');
+    feature = normalise(feat);
+    lastFeature = { key: msg.featureKey, feature };
+  }
   const region = msg.region === null ? null : await regionMask(msg.kingdom, l, msg.region);
   const ranking = await rank({
-    feature: normalise(feat),
+    feature,
     families: l.families,
     familyTable: l.familyTable,
     loadShard: (f) => shard(msg.kingdom, l, f),

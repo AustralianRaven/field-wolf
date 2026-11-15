@@ -25,18 +25,18 @@ Everything runs in the visitor's own browser. No photo ever leaves their machine
 ## Operating Context
 
 - Two halves, chosen from the home page: Flora (plants, at `/flora`) and Fauna (animals, at `/fauna`).
-- A one-time setup at `/setup` downloads the model (about 290 MB) into the browser's cache. Any identify page visited without a cached model sends the visitor to `/setup`. When the download finishes, the visitor returns home and sees "Your setup is done".
+- A one-time setup at `/setup` downloads the model (about 290 MB) into the browser's cache. Without a cached model, home shows a warning and each identify page a popup, both linking to `/setup`. When the download finishes, the visitor returns home and sees "Your setup is done".
 - The region filter defaults to "Everywhere". A visitor can narrow it to a continent, then optionally a country (for example Australia).
 - Identification is per photo, after the fact. The visitor may draw a box around the subject; without a box, the whole photo is analysed.
 
 ## Capabilities and Constraints
 
 - Model: BioCLIP 2, image encoder, INT8 ONNX (`mahan-ym/bioclip-2-quantized`, MIT), proven in RoamWolf's BirdUp.
-- Species tables: built offline with BioCLIP 2's text encoder, split into one family table plus per-family (and, for very large families, per-genus) shards. Hosted in a public Hugging Face dataset repo, fetched on demand and cached.
-- Region lists: built offline from GBIF occurrence data, per continent and per country.
+- Species tables: built offline with BioCLIP 2's text encoder, split into one family table plus per-family shards. Committed to this repo and served by GitHub Pages; the app depends on no external API at runtime except the one-time model download.
+- Region lists: built offline from iNaturalist research-grade records, per country, with continents as their union (Antarctica as everything south of 60°S).
 - Results show the top three species with common and scientific names. Below the confidence bar, the result falls back to the genus or family.
 - Display name is "FieldWolf"; the repo is `field-wolf`.
-- Undecided: the Hugging Face dataset repo name; the exact name source licence (GBIF backbone or similar).
+- Self-reliance: all data lives in the repo. Only the model comes from Hugging Face.
 
 ## Brand Commitments
 

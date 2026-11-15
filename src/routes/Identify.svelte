@@ -84,19 +84,21 @@
     <RegionPicker {regions} value={region} onChange={setRegion} />
     {#if photo}
       <span class="vr" aria-hidden="true"></span>
-      <button class="btn btn-secondary" onclick={() => input?.click()}>Change photo</button>
-      {#if box}
-        <button class="btn btn-ghost" onclick={() => setBox(null, true)}>Clear box</button>
-      {:else}
-        <button class="btn btn-ghost" onclick={() => setBox({ x: 0.2, y: 0.2, w: 0.6, h: 0.6 }, true)}>Add a box</button>
-      {/if}
+      <div class="acts">
+        <button class="btn btn-secondary" onclick={() => input?.click()}>Change photo</button>
+        {#if box}
+          <button class="btn btn-ghost" onclick={() => setBox(null, true)}>Clear box</button>
+        {:else}
+          <button class="btn btn-ghost" onclick={() => setBox({ x: 0.2, y: 0.2, w: 0.6, h: 0.6 }, true)}>Add a box</button>
+        {/if}
+      </div>
     {/if}
     <input bind:this={input} class="visually-hidden" type="file" accept="image/*" tabindex="-1" aria-hidden="true" onchange={(e) => { const f = e.currentTarget.files?.[0]; if (f) setFile(f); e.currentTarget.value = ''; }} />
   </div>
 </div>
 
 <main class="page work" bind:this={work}>
-  <PhotoPlate {photoUrl} {box} noun={info.noun} onFile={setFile} onBox={setBox} bind:anchor={boxEl} />
+  <PhotoPlate {photoUrl} {box} noun={info.noun} onFile={setFile} onBox={setBox} analysed={analyser.ranking !== null} bind:anchor={boxEl} />
   <Results
     status={analyser.state}
     ranking={analyser.ranking}
@@ -146,6 +148,10 @@
     height: 24px;
     background: var(--line);
   }
+  .acts {
+    display: flex;
+    gap: 8px;
+  }
   .work {
     position: relative;
     display: grid;
@@ -167,11 +173,32 @@
     .work {
       grid-template-columns: 1fr;
     }
-    .grow {
+    .grow,
+    .vr {
       display: none;
     }
     h1 {
       width: 100%;
+    }
+  }
+  @media (max-width: 600px) {
+    .row {
+      display: grid;
+      gap: 10px;
+    }
+    .row :global(.picker) {
+      display: grid;
+      grid-template-columns: auto 1fr;
+    }
+    .row :global(.picker .select) {
+      max-width: none;
+      width: 100%;
+    }
+    .row :global(.picker label) {
+      display: contents;
+    }
+    .acts .btn {
+      flex: 1;
     }
   }
 </style>

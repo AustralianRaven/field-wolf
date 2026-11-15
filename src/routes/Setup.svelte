@@ -42,7 +42,7 @@
     <dl class="facts">
       <div><dt>Download</dt><dd>About 290 MB, once</dd></div>
       <div><dt>Where it lives</dt><dd>This browser's storage</dd></div>
-      <div><dt>Each photo</dt><dd>A few seconds on a laptop</dd></div>
+      <div><dt>Each photo</dt><dd>About 5 seconds on a laptop; the first takes longer while the model loads</dd></div>
     </dl>
 
     {#if setup.ready && phase === 'idle'}

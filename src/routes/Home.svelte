@@ -8,9 +8,9 @@
   import { href, router } from '../lib/router.svelte';
   import { setup } from '../lib/setup.svelte';
 
-  const guides: { k: Kingdom; plate: string; blurb: string }[] = [
-    { k: 'flora', plate: 'Plate I', blurb: 'Trees, flowers, ferns, grasses and mosses.' },
-    { k: 'fauna', plate: 'Plate II', blurb: 'Birds, mammals, reptiles, insects, spiders and fish.' },
+  const guides: { k: Kingdom; blurb: string }[] = [
+    { k: 'flora', blurb: 'Trees, flowers, ferns, grasses and mosses.' },
+    { k: 'fauna', blurb: 'Birds, mammals, reptiles, insects, spiders and fish.' },
   ];
   let counts = $state<Partial<Record<Kingdom, number>>>({});
 
@@ -41,7 +41,6 @@
       <a class="guide {g.k}" href={href(g.k)} onclick={router.link}>
         <span class="art"><KingdomIcon kingdom={g.k} size={96} /></span>
         <span class="caption">
-          <span class="plate">{g.plate}</span>
           <span class="title name">{KINGDOMS[g.k].title}</span>
           <span class="blurb">{g.blurb}</span>
           <span class="count">{counts[g.k] ? `${fmt.format(counts[g.k]!)} ${KINGDOMS[g.k].plural}` : ' '}</span>
@@ -135,11 +134,6 @@
     gap: 6px;
     padding: clamp(20px, 2.4vw, 32px);
     padding-right: 56px;
-  }
-  .plate {
-    font-size: 13px;
-    color: var(--muted);
-    font-weight: 600;
   }
   .title {
     font-size: clamp(40px, 4.4vw, 64px);

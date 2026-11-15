@@ -77,6 +77,7 @@
       </p>
 
       <div class="answer">
+        <span class="one name" aria-hidden="true">1</span>
         <figure class="thumb" bind:this={thumbEl}>
           <canvas bind:this={canvas} width="224" height="224" aria-label="The area that was analysed"></canvas>
           <figcaption>Analysed area</figcaption>
@@ -208,9 +209,17 @@
   }
   .answer {
     display: grid;
-    grid-template-columns: 112px 1fr;
-    gap: 24px;
+    grid-template-columns: 32px 112px 1fr;
+    column-gap: 12px;
     align-items: start;
+  }
+  .one {
+    font-size: 28px;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .answer .names {
+    padding-left: 12px;
   }
   .thumb {
     margin: 0;
@@ -352,8 +361,10 @@
   }
   @media (max-width: 520px) {
     .answer {
-      grid-template-columns: 80px 1fr;
-      gap: 16px;
+      grid-template-columns: 24px 80px 1fr;
+    }
+    .answer .names {
+      padding-left: 4px;
     }
     .thumb canvas {
       width: 80px;

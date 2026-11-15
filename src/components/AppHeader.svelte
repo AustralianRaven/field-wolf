@@ -90,8 +90,11 @@
     color: var(--shell-muted);
   }
   .status a {
-    color: var(--lime);
+    color: var(--shell-ink);
     font-weight: 600;
+  }
+  .status a:hover {
+    color: #fff;
   }
   .dot {
     width: 8px;

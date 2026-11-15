@@ -4,7 +4,7 @@ A first-time visitor sets FieldWolf up, identifies an animal and a plant, and se
 
 ![FieldWolf in action: setup, a kookaburra, a box, the region filter, a protea, and the species list](docs/demo/fieldwolf-demo.gif)
 
-The full-quality recording is [docs/demo/fieldwolf-demo.mp4](docs/demo/fieldwolf-demo.mp4) (70 seconds).
+The full-quality recording is [docs/demo/fieldwolf-demo.mp4](docs/demo/fieldwolf-demo.mp4) (81 seconds).
 
 ## Step by step
 

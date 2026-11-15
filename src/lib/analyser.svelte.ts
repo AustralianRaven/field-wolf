@@ -6,6 +6,8 @@ import type { Box } from './region';
 import type { WorkerIn, WorkerOut } from './worker/identify.worker';
 
 let worker: Worker | null = null;
+/** Counts photos across the whole session, so a fingerprint key never repeats between page visits. */
+let photoCounter = 0;
 // eslint-disable-next-line svelte/prefer-svelte-reactivity -- plain listener registry, never rendered
 const listeners = new Set<(m: WorkerOut) => void>();
 
@@ -33,6 +35,8 @@ export class Analyser {
   error = $state<string | null>(null);
   notSetUp = $state(false);
   private seq = 0;
+  private photoKey = 0;
+  private lastPhoto: Blob | null = null;
   private off: () => void;
 
   constructor(private kingdom: Kingdom) {
@@ -62,7 +66,12 @@ export class Analyser {
     this.error = null;
     // The box may be a reactive proxy, which a worker cannot receive: send a plain copy.
     const plain = box ? $state.snapshot(box) : null;
-    getWorker().postMessage({ type: 'identify', id: this.seq, kingdom: this.kingdom, photo, box: plain, region } satisfies WorkerIn);
+    if (photo !== this.lastPhoto) {
+      this.lastPhoto = photo;
+      this.photoKey = ++photoCounter;
+    }
+    const featureKey = `${this.photoKey}:${JSON.stringify(plain)}`;
+    getWorker().postMessage({ type: 'identify', id: this.seq, kingdom: this.kingdom, photo, box: plain, region, featureKey } satisfies WorkerIn);
   }
 
   reset(): void {

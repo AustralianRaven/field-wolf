@@ -14,7 +14,7 @@ test.describe('Box, region and species list', () => {
     await page.mouse.down();
     await page.mouse.move(b.x + b.width * 0.75, b.y + b.height * 0.85, { steps: 6 });
     await page.mouse.up();
-    await expect(page.locator('.stage .box'), 'When I drag on the photo, then a box should be drawn').toBeVisible();
+    await expect(page.locator('.stage .box:not(.whole)'), 'When I drag on the photo, then a box should be drawn').toBeVisible();
     await expect(page.getByRole('button', { name: 'Clear box' }), 'And Clear box should be offered').toBeVisible();
     await expect(page.getByTestId('result'), 'And the box should be identified as a kookaburra').toHaveAttribute('data-top', /^Dacelo novaeguineae/);
 
@@ -26,7 +26,8 @@ test.describe('Box, region and species list', () => {
     await expect(page.getByTestId('result'), 'And the result should be settled').not.toHaveClass(/stale/);
 
     await page.getByRole('button', { name: 'Clear box' }).click();
-    await expect(page.locator('.stage .box'), 'When I clear the box, then it should be gone').toHaveCount(0);
+    await expect(page.locator('.stage .box:not(.whole)'), 'When I clear the box, then the drawn box should be gone').toHaveCount(0);
+    await expect(page.locator('.stage .box.whole'), 'And the whole photo should be framed as the analysed area').toBeVisible();
   });
 
   test('Given the species list, when I search for kookaburra, then matching species are listed', async ({ page }) => {
