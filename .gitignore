@@ -1,0 +1,13 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+tools/node_modules/
+tools/.cache/
+.impeccable/questions/
+.impeccable/review/
+.impeccable/live/
+.vite/
+*.log
+.vitest/
+.playwright-profile/
