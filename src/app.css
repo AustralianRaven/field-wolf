@@ -1,0 +1,196 @@
+/* FieldWolf: Field Guide Plate. Tokens first; components use only these. */
+:root {
+  --shell: #2b1747;
+  --shell-ink: #f3eefa;
+  --shell-muted: #c3b7d8;
+  --violet: #6b3fa0;
+  --violet-strong: #57308a;
+  --violet-soft: #ece6f5;
+  --lime: #c6e03a;
+  --lime-ink: #1c1726;
+  --ground: #f6f5fa;
+  --plate: #ffffff;
+  --ink: #1c1726;
+  --muted: #5e5770;
+  --line: #dedae8;
+  --line-strong: #c9c3d8;
+  --empty: #e3dfec;
+  --warn-bg: #fff6d6;
+  --warn-line: #e5c55a;
+  --warn-ink: #5a4400;
+  --bad: #a3253a;
+
+  --font-ui: 'Public Sans', system-ui, sans-serif;
+  --font-name: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, serif;
+
+  --gutter: clamp(16px, 3.4vw, 48px);
+  --radius: 6px;
+  --shadow-plate: 0 1px 2px rgb(28 23 38 / 6%), 0 8px 24px -12px rgb(43 23 71 / 18%);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: light;
+  accent-color: var(--violet);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scrollbar-color: var(--line-strong) var(--ground);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--ground);
+  color: var(--ink);
+  font: 400 15px/1.5 var(--font-ui);
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: var(--lime);
+  color: var(--lime-ink);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--violet);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  color: var(--violet-strong);
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--lime);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px var(--shell);
+  border-radius: 2px;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+.name {
+  font-family: var(--font-name);
+}
+
+.sci {
+  font-family: var(--font-name);
+  font-style: italic;
+}
+
+/* Buttons: one family, three weights. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), color 160ms var(--ease-out);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.btn-primary {
+  background: var(--violet);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--violet-strong);
+  color: #fff;
+}
+
+.btn-secondary {
+  border-color: var(--violet);
+  color: var(--violet);
+  background: var(--plate);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--violet-soft);
+  color: var(--violet-strong);
+}
+
+.btn-ghost {
+  color: var(--violet);
+  background: transparent;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--violet-soft);
+}
+
+.select {
+  min-height: 40px;
+  padding: 0 36px 0 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--plate)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0h10L5 6z' fill='%231C1726'/%3E%3C/svg%3E")
+    no-repeat right 14px center;
+  appearance: none;
+  cursor: pointer;
+}
+
+.select:hover {
+  border-color: var(--violet);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.page {
+  width: min(1440px, 100%);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "kingdom": "fauna",
+  "version": "f7056a2a7b56",
+  "count": 301516,
+  "families": 5062,
+  "dim": 768,
+  "template": "tax",
+  "familyMode": "mean",
+  "regions": 249,
+  "builtAt": "2026-11-15",
+  "source": "Species with research-grade observations on iNaturalist (inaturalist.org); taxonomy from the iNaturalist taxonomy export."
+}

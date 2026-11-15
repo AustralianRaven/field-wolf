@@ -1,0 +1,21 @@
+{
+  "name": "fieldwolf-tools",
+  "private": true,
+  "description": "Offline data builders for FieldWolf. Not installed in CI.",
+  "type": "module",
+  "scripts": {
+    "fetch-models": "node fetch-models.mjs",
+    "fetch-species": "node fetch-species.mjs",
+    "fetch-taxonomy": "node fetch-taxonomy.mjs",
+    "fetch-regions": "node fetch-regions.mjs",
+    "embed": "node embed.mjs",
+    "pack": "node pack.mjs",
+    "fetch-photos": "node fetch-photos.mjs",
+    "accuracy": "node accuracy.mjs"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "3.8.1",
+    "onnxruntime-node": "1.31.1",
+    "sharp": "^0.35.5"
+  }
+}

@@ -1,0 +1,538 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-15T06:04:05.588Z",
+  "title": "Design System: FieldWolf",
+  "extensions": {
+    "colorMeta": {
+      "shell": {
+        "role": "secondary",
+        "displayName": "Night Shell",
+        "canonical": "oklch(26.0% 0.086 299.6)",
+        "tonalRamp": [
+          "oklch(15% 0.039 299.6)",
+          "oklch(26% 0.052 299.6)",
+          "oklch(37% 0.065 299.6)",
+          "oklch(48% 0.078 299.6)",
+          "oklch(59% 0.082 299.6)",
+          "oklch(70% 0.069 299.6)",
+          "oklch(82% 0.055 299.6)",
+          "oklch(95% 0.039 299.6)"
+        ]
+      },
+      "shell-ink": {
+        "role": "secondary",
+        "displayName": "Shell Ink",
+        "canonical": "oklch(95.6% 0.017 304.8)",
+        "tonalRamp": [
+          "oklch(15% 0.008 304.8)",
+          "oklch(26% 0.010 304.8)",
+          "oklch(37% 0.013 304.8)",
+          "oklch(48% 0.015 304.8)",
+          "oklch(59% 0.016 304.8)",
+          "oklch(70% 0.013 304.8)",
+          "oklch(82% 0.011 304.8)",
+          "oklch(95% 0.008 304.8)"
+        ]
+      },
+      "shell-muted": {
+        "role": "secondary",
+        "displayName": "Shell Mist",
+        "canonical": "oklch(80.0% 0.048 301.9)",
+        "tonalRamp": [
+          "oklch(15% 0.022 301.9)",
+          "oklch(26% 0.029 301.9)",
+          "oklch(37% 0.036 301.9)",
+          "oklch(48% 0.043 301.9)",
+          "oklch(59% 0.045 301.9)",
+          "oklch(70% 0.038 301.9)",
+          "oklch(82% 0.030 301.9)",
+          "oklch(95% 0.022 301.9)"
+        ]
+      },
+      "violet": {
+        "role": "primary",
+        "displayName": "Field Violet",
+        "canonical": "oklch(46.9% 0.152 301.7)",
+        "tonalRamp": [
+          "oklch(15% 0.069 301.7)",
+          "oklch(26% 0.092 301.7)",
+          "oklch(37% 0.115 301.7)",
+          "oklch(48% 0.138 301.7)",
+          "oklch(59% 0.144 301.7)",
+          "oklch(70% 0.121 301.7)",
+          "oklch(82% 0.096 301.7)",
+          "oklch(95% 0.069 301.7)"
+        ]
+      },
+      "violet-strong": {
+        "role": "primary",
+        "displayName": "Pressed Violet",
+        "canonical": "oklch(40.7% 0.144 300.0)",
+        "tonalRamp": [
+          "oklch(15% 0.065 300.0)",
+          "oklch(26% 0.087 300.0)",
+          "oklch(37% 0.108 300.0)",
+          "oklch(48% 0.130 300.0)",
+          "oklch(59% 0.136 300.0)",
+          "oklch(70% 0.114 300.0)",
+          "oklch(82% 0.091 300.0)",
+          "oklch(95% 0.065 300.0)"
+        ]
+      },
+      "violet-soft": {
+        "role": "primary",
+        "displayName": "Violet Wash",
+        "canonical": "oklch(93.4% 0.021 304.0)",
+        "tonalRamp": [
+          "oklch(15% 0.010 304.0)",
+          "oklch(26% 0.013 304.0)",
+          "oklch(37% 0.016 304.0)",
+          "oklch(48% 0.019 304.0)",
+          "oklch(59% 0.020 304.0)",
+          "oklch(70% 0.017 304.0)",
+          "oklch(82% 0.013 304.0)",
+          "oklch(95% 0.010 304.0)"
+        ]
+      },
+      "lime": {
+        "role": "tertiary",
+        "displayName": "Marker Chartreuse",
+        "canonical": "oklch(85.9% 0.183 118.4)",
+        "tonalRamp": [
+          "oklch(15% 0.083 118.4)",
+          "oklch(26% 0.110 118.4)",
+          "oklch(37% 0.138 118.4)",
+          "oklch(48% 0.165 118.4)",
+          "oklch(59% 0.173 118.4)",
+          "oklch(70% 0.145 118.4)",
+          "oklch(82% 0.115 118.4)",
+          "oklch(95% 0.083 118.4)"
+        ]
+      },
+      "lime-ink": {
+        "role": "tertiary",
+        "displayName": "Lime Ink",
+        "canonical": "oklch(21.8% 0.030 299.2)",
+        "tonalRamp": [
+          "oklch(15% 0.013 299.2)",
+          "oklch(26% 0.018 299.2)",
+          "oklch(37% 0.022 299.2)",
+          "oklch(48% 0.027 299.2)",
+          "oklch(59% 0.028 299.2)",
+          "oklch(70% 0.024 299.2)",
+          "oklch(82% 0.019 299.2)",
+          "oklch(95% 0.013 299.2)"
+        ]
+      },
+      "ground": {
+        "role": "neutral",
+        "displayName": "Lavender Ground",
+        "canonical": "oklch(97.2% 0.007 295.5)",
+        "tonalRamp": [
+          "oklch(15% 0.003 295.5)",
+          "oklch(26% 0.004 295.5)",
+          "oklch(37% 0.005 295.5)",
+          "oklch(48% 0.006 295.5)",
+          "oklch(59% 0.006 295.5)",
+          "oklch(70% 0.005 295.5)",
+          "oklch(82% 0.004 295.5)",
+          "oklch(95% 0.003 295.5)"
+        ]
+      },
+      "plate": {
+        "role": "neutral",
+        "displayName": "Plate White",
+        "canonical": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "oklch(15% 0.002 89.9)",
+          "oklch(26% 0.002 89.9)",
+          "oklch(37% 0.003 89.9)",
+          "oklch(48% 0.004 89.9)",
+          "oklch(59% 0.004 89.9)",
+          "oklch(70% 0.003 89.9)",
+          "oklch(82% 0.003 89.9)",
+          "oklch(95% 0.002 89.9)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(21.8% 0.030 299.2)",
+        "tonalRamp": [
+          "oklch(15% 0.013 299.2)",
+          "oklch(26% 0.018 299.2)",
+          "oklch(37% 0.022 299.2)",
+          "oklch(48% 0.027 299.2)",
+          "oklch(59% 0.028 299.2)",
+          "oklch(70% 0.024 299.2)",
+          "oklch(82% 0.019 299.2)",
+          "oklch(95% 0.013 299.2)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Field Grey",
+        "canonical": "oklch(47.3% 0.041 297.7)",
+        "tonalRamp": [
+          "oklch(15% 0.018 297.7)",
+          "oklch(26% 0.025 297.7)",
+          "oklch(37% 0.031 297.7)",
+          "oklch(48% 0.037 297.7)",
+          "oklch(59% 0.038 297.7)",
+          "oklch(70% 0.032 297.7)",
+          "oklch(82% 0.026 297.7)",
+          "oklch(95% 0.018 297.7)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "oklch(89.6% 0.019 299.0)",
+        "tonalRamp": [
+          "oklch(15% 0.009 299.0)",
+          "oklch(26% 0.012 299.0)",
+          "oklch(37% 0.015 299.0)",
+          "oklch(48% 0.018 299.0)",
+          "oklch(59% 0.018 299.0)",
+          "oklch(70% 0.015 299.0)",
+          "oklch(82% 0.012 299.0)",
+          "oklch(95% 0.009 299.0)"
+        ]
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "Strong Hairline",
+        "canonical": "oklch(82.8% 0.030 298.8)",
+        "tonalRamp": [
+          "oklch(15% 0.014 298.8)",
+          "oklch(26% 0.018 298.8)",
+          "oklch(37% 0.022 298.8)",
+          "oklch(48% 0.027 298.8)",
+          "oklch(59% 0.028 298.8)",
+          "oklch(70% 0.024 298.8)",
+          "oklch(82% 0.019 298.8)",
+          "oklch(95% 0.014 298.8)"
+        ]
+      },
+      "empty": {
+        "role": "neutral",
+        "displayName": "Unfilled",
+        "canonical": "oklch(91.1% 0.018 300.0)",
+        "tonalRamp": [
+          "oklch(15% 0.008 300.0)",
+          "oklch(26% 0.011 300.0)",
+          "oklch(37% 0.014 300.0)",
+          "oklch(48% 0.016 300.0)",
+          "oklch(59% 0.017 300.0)",
+          "oklch(70% 0.014 300.0)",
+          "oklch(82% 0.011 300.0)",
+          "oklch(95% 0.008 300.0)"
+        ]
+      },
+      "warn-bg": {
+        "role": "neutral",
+        "displayName": "Notice Wash",
+        "canonical": "oklch(97.2% 0.043 94.1)",
+        "tonalRamp": [
+          "oklch(15% 0.019 94.1)",
+          "oklch(26% 0.026 94.1)",
+          "oklch(37% 0.032 94.1)",
+          "oklch(48% 0.039 94.1)",
+          "oklch(59% 0.040 94.1)",
+          "oklch(70% 0.034 94.1)",
+          "oklch(82% 0.027 94.1)",
+          "oklch(95% 0.019 94.1)"
+        ]
+      },
+      "warn-line": {
+        "role": "neutral",
+        "displayName": "Notice Line",
+        "canonical": "oklch(83.1% 0.131 92.7)",
+        "tonalRamp": [
+          "oklch(15% 0.059 92.7)",
+          "oklch(26% 0.079 92.7)",
+          "oklch(37% 0.099 92.7)",
+          "oklch(48% 0.118 92.7)",
+          "oklch(59% 0.123 92.7)",
+          "oklch(70% 0.104 92.7)",
+          "oklch(82% 0.083 92.7)",
+          "oklch(95% 0.059 92.7)"
+        ]
+      },
+      "warn-ink": {
+        "role": "neutral",
+        "displayName": "Notice Ink",
+        "canonical": "oklch(39.9% 0.082 87.6)",
+        "tonalRamp": [
+          "oklch(15% 0.037 87.6)",
+          "oklch(26% 0.049 87.6)",
+          "oklch(37% 0.062 87.6)",
+          "oklch(48% 0.074 87.6)",
+          "oklch(59% 0.077 87.6)",
+          "oklch(70% 0.065 87.6)",
+          "oklch(82% 0.052 87.6)",
+          "oklch(95% 0.037 87.6)"
+        ]
+      },
+      "bad": {
+        "role": "neutral",
+        "displayName": "Fault",
+        "canonical": "oklch(47.5% 0.161 17.0)",
+        "tonalRamp": [
+          "oklch(15% 0.073 17.0)",
+          "oklch(26% 0.097 17.0)",
+          "oklch(37% 0.121 17.0)",
+          "oklch(48% 0.146 17.0)",
+          "oklch(59% 0.152 17.0)",
+          "oklch(70% 0.128 17.0)",
+          "oklch(82% 0.102 17.0)",
+          "oklch(95% 0.073 17.0)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Home page statement only; guide-card titles use the same face larger."
+      },
+      "headline": {
+        "displayName": "Species name",
+        "purpose": "The common name on the facing column; the empty-state question."
+      },
+      "title": {
+        "displayName": "Page title",
+        "purpose": "Setup and Species list page titles."
+      },
+      "scientific": {
+        "displayName": "Scientific",
+        "purpose": "Binomials and genus names, always italic."
+      },
+      "tool-title": {
+        "displayName": "Tool title",
+        "purpose": "The identify tool-bar heading."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text and UI copy, tabular figures."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "All button labels."
+      },
+      "label": {
+        "displayName": "Guide-word label",
+        "purpose": "The taxonomy run only; uppercase, tracked."
+      }
+    },
+    "shadows": [
+      {
+        "name": "plate",
+        "value": "0 1px 2px rgb(28 23 38 / 6%), 0 8px 24px -12px rgb(43 23 71 / 18%)",
+        "purpose": "Every plate at rest."
+      },
+      {
+        "name": "plate-lifted",
+        "value": "0 2px 4px rgb(28 23 38 / 8%), 0 18px 40px -18px rgb(43 23 71 / 35%)",
+        "purpose": "A linked plate on hover, with translateY(-2px)."
+      },
+      {
+        "name": "dialog",
+        "value": "0 24px 60px -20px rgb(28 23 38 / 45%)",
+        "purpose": "The modal notice only."
+      },
+      {
+        "name": "selection-veil",
+        "value": "0 0 0 1px rgb(28 23 38 / 55%), inset 0 0 0 1px rgb(28 23 38 / 35%), 0 0 0 9999px rgb(28 23 38 / 28%)",
+        "purpose": "The chartreuse selection box on the photo."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 3px solid #c6e03a; outline-offset: 2px; box-shadow: 0 0 0 5px #2b1747",
+        "purpose": "Global keyboard focus."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Every state transition."
+      },
+      {
+        "name": "control",
+        "value": "160ms",
+        "purpose": "Buttons, tabs, inputs, disclosure carets."
+      },
+      {
+        "name": "plate-hover",
+        "value": "240ms",
+        "purpose": "Guide-card lift and arrow nudge."
+      },
+      {
+        "name": "leader-draw",
+        "value": "560ms, staggered 120ms; end dots fade in over 200ms after 420ms",
+        "purpose": "Leader lines drawing in when a result lands."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "1ms",
+        "purpose": "All animation and transition durations under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "narrow",
+        "value": "520px"
+      },
+      {
+        "name": "stack-tools",
+        "value": "600px"
+      },
+      {
+        "name": "shell-wrap",
+        "value": "760px"
+      },
+      {
+        "name": "home-single",
+        "value": "820px"
+      },
+      {
+        "name": "stack-work",
+        "value": "900px"
+      },
+      {
+        "name": "page-max",
+        "value": "1440px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one main action per view.",
+      "html": "<button class=\"ds-btn ds-btn-primary\">Go to setup</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 16px;border-radius:var(--radius);border:1px solid transparent;font:600 14px/1.5 var(--font-ui);cursor:pointer;transition:background-color 160ms var(--ease-out),border-color 160ms var(--ease-out),color 160ms var(--ease-out);} .ds-btn-primary{background:var(--violet);color:#fff;} .ds-btn-primary:hover{background:var(--violet-strong);} .ds-btn:focus-visible{outline:3px solid var(--lime);outline-offset:2px;box-shadow:0 0 0 5px var(--shell);border-radius:2px;}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A standing alternative, such as Change photo.",
+      "html": "<button class=\"ds-btn ds-btn-secondary\">Change photo</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 16px;border-radius:var(--radius);border:1px solid transparent;font:600 14px/1.5 var(--font-ui);cursor:pointer;transition:background-color 160ms var(--ease-out),border-color 160ms var(--ease-out),color 160ms var(--ease-out);} .ds-btn-secondary{border-color:var(--violet);color:var(--violet);background:var(--plate);} .ds-btn-secondary:hover{background:var(--violet-soft);color:var(--violet-strong);} .ds-btn:focus-visible{outline:3px solid var(--lime);outline-offset:2px;box-shadow:0 0 0 5px var(--shell);border-radius:2px;}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "A light action, such as Clear box or Not now.",
+      "html": "<button class=\"ds-btn ds-btn-ghost\">Clear box</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 16px;border-radius:var(--radius);border:1px solid transparent;font:600 14px/1.5 var(--font-ui);cursor:pointer;transition:background-color 160ms var(--ease-out),border-color 160ms var(--ease-out),color 160ms var(--ease-out);} .ds-btn-ghost{color:var(--violet);background:transparent;} .ds-btn-ghost:hover{background:var(--violet-soft);} .ds-btn:focus-visible{outline:3px solid var(--lime);outline-offset:2px;box-shadow:0 0 0 5px var(--shell);border-radius:2px;}"
+    },
+    {
+      "name": "Region Select",
+      "kind": "input",
+      "refersTo": "select",
+      "description": "Labelled select with an ink caret.",
+      "html": "<label class=\"ds-pick\"><span>Region</span><select class=\"ds-select\"><option>Everywhere</option><option>Oceania</option></select></label>",
+      "css": ".ds-pick{display:flex;align-items:center;gap:8px;font-family:var(--font-ui);} .ds-pick span{font-size:13px;font-weight:600;color:var(--muted);} .ds-select{min-height:40px;padding:0 36px 0 12px;border:1px solid var(--line-strong);border-radius:var(--radius);background:var(--plate) url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0h10L5 6z' fill='%231C1726'/%3E%3C/svg%3E\") no-repeat right 14px center;appearance:none;font:400 15px var(--font-ui);color:var(--ink);cursor:pointer;} .ds-select:hover{border-color:var(--violet);} .ds-select:focus-visible{outline:3px solid var(--lime);outline-offset:2px;box-shadow:0 0 0 5px var(--shell);border-radius:2px;}"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "Species search on the list page.",
+      "html": "<input class=\"ds-search\" type=\"search\" placeholder=\"Search by common or scientific name\">",
+      "css": ".ds-search{width:100%;min-height:40px;padding:0 12px;border:1px solid var(--line-strong);border-radius:var(--radius);background:var(--plate);font:400 15px var(--font-ui);color:var(--ink);} .ds-search::placeholder{color:#6e6780;} .ds-search:focus-visible{outline:3px solid var(--lime);outline-offset:2px;box-shadow:0 0 0 5px var(--shell);border-radius:2px;}"
+    },
+    {
+      "name": "Shell Bar",
+      "kind": "nav",
+      "refersTo": "shell-bar",
+      "description": "Deep violet bar with brand, kingdom tabs and model status.",
+      "html": "<header class=\"ds-bar\"><span class=\"ds-brand\">FieldWolf</span><nav class=\"ds-nav\"><a class=\"ds-tab\" href=\"#\">Flora</a><a class=\"ds-tab ds-on\" href=\"#\">Fauna</a><a class=\"ds-tab\" href=\"#\">Species list</a></nav><span class=\"ds-status\"><i></i>ID model ready on this device</span></header>",
+      "css": ".ds-bar{display:flex;align-items:center;gap:40px;min-height:60px;padding:0 24px;background:var(--shell);color:var(--shell-ink);font-family:var(--font-ui);} .ds-brand{color:#fff;font-weight:700;font-size:18px;letter-spacing:-0.01em;} .ds-nav{display:flex;align-self:stretch;} .ds-tab{display:flex;align-items:center;padding:3px 14px 0;color:var(--shell-muted);font-weight:500;text-decoration:none;border-bottom:3px solid transparent;transition:color 160ms var(--ease-out),border-color 160ms var(--ease-out);} .ds-tab:hover{color:#fff;} .ds-tab.ds-on{color:#fff;border-bottom-color:var(--lime);} .ds-tab:focus-visible{outline:3px solid var(--lime);outline-offset:2px;box-shadow:0 0 0 5px var(--shell);border-radius:2px;} .ds-status{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--shell-muted);} .ds-status i{width:8px;height:8px;border-radius:50%;background:var(--lime);}"
+    },
+    {
+      "name": "Confidence Ramp and Chip",
+      "kind": "chip",
+      "refersTo": "chip-confident",
+      "description": "Five fixed violet steps, the percent, then a verdict chip.",
+      "html": "<div class=\"ds-conf\"><span class=\"ds-ramp\"><i class=\"f\"></i><i class=\"f\"></i><i class=\"f\"></i><i class=\"f\"></i><i class=\"f\"></i></span><b>93%</b><span class=\"ds-chip ds-sure\">Confident</span><span class=\"ds-chip\">Likely genus</span></div>",
+      "css": ".ds-conf{display:flex;align-items:center;gap:16px;font-family:var(--font-ui);color:var(--ink);font-variant-numeric:tabular-nums;} .ds-conf b{font-size:16px;} .ds-ramp{display:flex;gap:4px;} .ds-ramp i{width:40px;height:10px;background:var(--empty);} .ds-ramp i.f{background:var(--violet);} .ds-chip{padding:2px 8px;border-radius:3px;font-size:12px;font-weight:700;background:var(--empty);color:var(--ink);} .ds-chip.ds-sure{background:var(--lime);color:var(--lime-ink);}"
+    },
+    {
+      "name": "Plate",
+      "kind": "card",
+      "refersTo": "plate",
+      "description": "Square white plate with hairline and the plate shadow; the photo lives here.",
+      "html": "<figure class=\"ds-plate\"><div class=\"ds-mat\"><span class=\"ds-box\"></span></div><figcaption><b>Plate 1</b> · your photo</figcaption></figure>",
+      "css": ".ds-plate{margin:0;background:var(--plate);border:1px solid var(--line);box-shadow:var(--shadow-plate);padding:16px;font-family:var(--font-ui);} .ds-mat{position:relative;height:180px;background:#ece9f2;overflow:hidden;} .ds-box{position:absolute;left:25%;top:20%;width:45%;height:55%;border:2px solid var(--lime);box-shadow:0 0 0 1px rgb(28 23 38 / 55%),inset 0 0 0 1px rgb(28 23 38 / 35%),0 0 0 9999px rgb(28 23 38 / 28%);} .ds-plate figcaption{margin-top:14px;font-size:13px;color:var(--muted);} .ds-plate b{font-family:var(--font-name);font-weight:600;font-size:15px;color:var(--ink);}"
+    },
+    {
+      "name": "Facing Name",
+      "kind": "custom",
+      "refersTo": "headline",
+      "description": "Taxonomy guide-word run over an ink rule, then the serif common name and italic binomial.",
+      "html": "<div class=\"ds-face\"><p class=\"ds-run\"><span>Aves</span><em>›</em><span>Coraciiformes</span><em>›</em><span>Alcedinidae</span><em>›</em><span class=\"ds-gen\">Dacelo</span></p><h2 class=\"ds-common\">Laughing Kookaburra</h2><p class=\"ds-latin\">Dacelo novaeguineae</p><a class=\"ds-link\" href=\"#\">Compare photos on iNaturalist</a></div>",
+      "css": ".ds-face{display:grid;gap:6px;font-family:var(--font-ui);color:var(--ink);} .ds-run{display:flex;flex-wrap:wrap;gap:6px 8px;margin:0 0 14px;padding-bottom:10px;border-bottom:2px solid var(--ink);font-size:12px;line-height:20px;letter-spacing:0.08em;text-transform:uppercase;color:var(--violet);font-weight:600;} .ds-run em{font-style:normal;color:#a99bc2;} .ds-gen{font-family:var(--font-name);font-style:italic;color:var(--ink);text-transform:none;letter-spacing:0;font-size:15px;} .ds-common{margin:0;font-family:var(--font-name);font-weight:600;font-size:clamp(30px,2.9vw,42px);line-height:1.08;letter-spacing:-0.01em;} .ds-latin{margin:0;font-family:var(--font-name);font-style:italic;font-size:20px;color:#3a3249;} .ds-link{color:var(--violet);font-size:14px;font-weight:600;text-underline-offset:3px;} .ds-link:hover{color:var(--violet-strong);text-decoration-thickness:2px;} .ds-link:focus-visible{outline:3px solid var(--lime);outline-offset:2px;box-shadow:0 0 0 5px var(--shell);border-radius:2px;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Field Guide Plate",
+    "overview": "Every answer reads like a plate in a printed field guide: the visitor's own photo is the plate, framed in white on a cool lavender ground, and the species name faces it across the gutter. A deep violet shell bar holds the brand and the Flora/Fauna halves; below it, the work happens on white plates and ruled columns, the way a guide sets a figure against its text. The world refuses the category default of a drop zone and a rounded result card with a progress bar.\n\nProof sits beside the claim. The area the model analysed is marked in chartreuse on the photo, repeated as a crop thumbnail beside the name, and joined to it by chartreuse leader lines that draw in when a result lands. Confidence is a fixed five-step ramp, never a free-floating colour. Names carry the serif voice (common name upright, scientific name italic); everything that operates speaks in a plain grotesque. Density is calm: one plate, one facing column, generous gutters.",
+    "keyCharacteristics": [
+      "Photo as plate, name on the facing column, joined by leader lines.",
+      "Deep violet shell, violet controls, chartreuse as the marking colour.",
+      "Source Serif 4 for names, Public Sans for UI; tabular figures throughout.",
+      "Square plates, 6px controls, hairline lavender rules, a 2px ink rule heading each data column.",
+      "One soft plate shadow; depth is otherwise tonal."
+    ],
+    "rules": [
+      {
+        "name": "The Marker Rule",
+        "body": "Chartreuse marks what was analysed and what is live: strokes, handles, dots, a chip, a small disc. It is never body text on a light ground and never fills a field larger than a 40px disc or a glyph. On a photo it always carries an ink keyline so it holds on any image.",
+        "section": "colors"
+      },
+      {
+        "name": "The Five Steps Rule",
+        "body": "Confidence is five fixed violet steps with the percent beside it and a chip after. Never a continuous bar, a gradient, or a traffic-light colour scale.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "The serif is for names: species, kingdoms, page titles and the plate numeral. Controls, labels, counts and messages stay in Public Sans.",
+        "section": "typography"
+      },
+      {
+        "name": "The Guide-Word Rule",
+        "body": "The only tracked uppercase line is the taxonomy run (Class › Order › Family › Genus), which carries data; the genus ends it in serif italic, sentence case. Don't add uppercase labels above headings.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Lift Rule",
+        "body": "Plates share one resting shadow. Only a plate that is itself a link lifts on hover.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do frame the visitor's photo as a square white plate with a 1px Hairline and the Plate shadow, and set the answer on the facing column.",
+      "Do keep chartreuse to marks: the analysed area, leader lines, the active tab, the Confident chip, status dots, focus and selection.",
+      "Do give chartreuse an ink keyline wherever it sits on a photo.",
+      "Do show confidence as five fixed violet steps, the percent, then a chip.",
+      "Do set species and kingdom names in Source Serif 4, binomials always italic, and everything operational in Public Sans with tabular figures.",
+      "Do head a data column with a 2px ink rule and divide rows with 1px hairlines.",
+      "Do use 6px corners on controls and 0px on plates.",
+      "Do run transitions at 160 to 240ms on the shared ease-out (cubic-bezier(0.16, 1, 0.3, 1)) and collapse them under reduced motion."
+    ],
+    "donts": [
+      "Don't wrap the result in a rounded card or show confidence as a continuous progress bar or traffic-light colours.",
+      "Don't set text in chartreuse on a light ground or flood large areas with it.",
+      "Don't round plates or thumbnails.",
+      "Don't set controls, labels or messages in the serif.",
+      "Don't add uppercase tracked labels above headings; the taxonomy run is the only one, and it carries data.",
+      "Don't add new shadows beyond the four in the vocabulary."
+    ]
+  }
+}
