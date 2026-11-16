@@ -1,9 +1,11 @@
 <script lang="ts">
   /** The facing page: the name, its proof crop, an honest confidence, and the runners-up. */
   import type { AnalyserState } from '../lib/analyser.svelte';
+  import type { Region } from '../lib/data';
   import type { Guess, Ranking } from '../lib/rank';
   import { displayName } from '../lib/names';
   import { cropRect, type Box } from '../lib/region';
+  import RangeMap from './RangeMap.svelte';
 
   interface Props {
     status: AnalyserState;
@@ -15,11 +17,11 @@
     box: Box | null;
     hasPhoto: boolean;
     regionName: string;
+    /** regions.json for this kingdom: the map reads a species' seen-in indices against it. */
+    regions: Region[];
     thumbEl?: HTMLElement | null;
-    nameEl?: HTMLElement | null;
-    confEl?: HTMLElement | null;
   }
-  let { status, ranking, ms, error, noun, photoUrl, box, hasPhoto, regionName, thumbEl = $bindable(null), nameEl = $bindable(null), confEl = $bindable(null) }: Props = $props();
+  let { status, ranking, ms, error, noun, photoUrl, box, hasPhoto, regionName, regions, thumbEl = $bindable(null) }: Props = $props();
 
   let canvas = $state<HTMLCanvasElement>();
   const top = $derived(ranking?.guesses[0] ?? null);
@@ -82,7 +84,7 @@
           <canvas bind:this={canvas} width="224" height="224" aria-label="The area that was analysed"></canvas>
           <figcaption>Analysed area</figcaption>
         </figure>
-        <div class="names" bind:this={nameEl}>
+        <div class="names">
           {#if verdict.level === 'species'}
             <h2 class="common name" data-testid="answer">{displayName(top.common, top.scientific)}</h2>
             <p class="latin sci">{top.scientific}</p>
@@ -94,13 +96,16 @@
             <p class="latin">Closest: <span class="sci">{top.scientific}</span>{top.common ? ` (${displayName(top.common, top.scientific)})` : ''}</p>
           {:else}
             <h2 class="common name" data-testid="answer">Not sure</h2>
-            <p class="latin">The closest names are below, but none is a convincing match.</p>
+            <p class="latin" data-testid="closest">Closest: <span class="sci">{top.scientific}</span>{top.common ? ` (${displayName(top.common, top.scientific)})` : ''}</p>
+            <p class="caveat">Not a convincing match. Check it, and the names below, against real photos.</p>
           {/if}
-          <a class="inat" href={inat(top)} target="_blank" rel="noreferrer">Compare photos on iNaturalist</a>
+          <a class="inat" href={inat(top)} target="_blank" rel="noreferrer">Compare photos of <span class:sci={!top.common}>{displayName(top.common, top.scientific)}</span> on iNaturalist</a>
         </div>
       </div>
 
-      <div class="conf" bind:this={confEl}>
+      <RangeMap seenIn={top.seenIn} {regions} name={displayName(top.common, top.scientific)} topGuess={verdict.level !== 'species'} />
+
+      <div class="conf">
         <span class="ramp" role="img" aria-label="Confidence {steps(top.score)} of 5">
           {#each [1, 2, 3, 4, 5] as i (i)}<i class:f={i <= steps(top.score)}></i>{/each}
         </span>
@@ -255,6 +260,10 @@
   .latin {
     font-size: 20px;
     color: #3a3249;
+  }
+  .caveat {
+    font-size: 14px;
+    color: var(--muted);
   }
   .inat {
     font-size: 14px;

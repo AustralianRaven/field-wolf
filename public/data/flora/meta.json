@@ -1,12 +1,12 @@
 {
   "kingdom": "flora",
-  "version": "be960b3c9dc4",
+  "version": "08c889f24e02",
   "count": 160664,
   "families": 861,
   "dim": 768,
   "template": "tax",
   "familyMode": "mean",
   "regions": 249,
-  "builtAt": "2026-11-15",
+  "builtAt": "2026-11-16",
   "source": "Species with research-grade observations on iNaturalist (inaturalist.org); taxonomy from the iNaturalist taxonomy export."
 }

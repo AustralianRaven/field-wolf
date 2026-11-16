@@ -1,7 +1,8 @@
 /** Species tables and region lists, as the data builder (tools/pack.mjs) writes them. */
 import { cachedFetch } from './cache';
-import { dataUrl, type Kingdom } from './config';
+import { BASE, dataUrl, type Kingdom } from './config';
 import type { Family, SpeciesRow } from './rank';
+import type { World } from './range';
 
 export interface Meta {
   kingdom: Kingdom;
@@ -40,3 +41,8 @@ export const loadNames = async (k: Kingdom, m: Meta) =>
 
 /** The files setup downloads ahead, so the first identification is quick. Shards load on demand. */
 export const setupFiles = (k: Kingdom, m: Meta) => ['families.json', 'families.bin', 'regions.json'].map((f) => dataUrl(k, f, m.version));
+
+/** Bump when tools/build-world.mjs changes world.json, so cached copies are replaced. */
+const WORLD_VERSION = '1';
+/** The "where it has been seen" map's outlines, shared by both kingdoms. */
+export const loadWorld = async () => (await (await cachedFetch(`${BASE}data/world.json?v=${WORLD_VERSION}`)).json()) as World;

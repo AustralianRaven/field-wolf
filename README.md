@@ -51,6 +51,7 @@ node embed.mjs fauna      # text fingerprints (hours; FW_DML=1 adds a DirectML G
 node embed.mjs flora
 node pack.mjs fauna tax mean
 node pack.mjs flora tax mean
+npm run build-world       # the "where it has been seen" map outlines (Natural Earth, matched to iNat countries)
 npm run fetch-photos      # the 20 test photos
 npm run accuracy          # identify them offline with the same code the browser runs
 ```
@@ -60,6 +61,7 @@ Each rebuild changes `meta.json`'s version, so browsers fetch the new tables ins
 ## Credits
 
 - Species lists and taxonomy: [iNaturalist](https://www.inaturalist.org) and its observers.
+- Map outlines: [Natural Earth](https://www.naturalearthdata.com) 1:50m countries (public domain), via [world-atlas](https://github.com/topojson/world-atlas).
 - Model: BioCLIP 2 by the Imageomics Institute; 8-bit ONNX export by mahan-ym (MIT).
 - Test photos: iNaturalist observers, CC0 or CC BY. Each one is credited in `e2e/fixtures/photos/photos.json`.
 

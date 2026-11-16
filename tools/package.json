@@ -10,12 +10,17 @@
     "fetch-regions": "node fetch-regions.mjs",
     "embed": "node embed.mjs",
     "pack": "node pack.mjs",
+    "build-world": "node build-world.mjs",
     "fetch-photos": "node fetch-photos.mjs",
     "accuracy": "node accuracy.mjs"
   },
   "dependencies": {
     "@huggingface/transformers": "3.8.1",
+    "d3-geo": "3.1.1",
     "onnxruntime-node": "1.31.1",
-    "sharp": "^0.35.5"
+    "sharp": "^0.35.5",
+    "topojson-client": "3.1.0",
+    "topojson-simplify": "3.0.3",
+    "world-atlas": "2.0.2"
   }
 }
