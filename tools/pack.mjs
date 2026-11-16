@@ -4,7 +4,8 @@
 //   families.json   [{ name, class, order, offset, count }] in table order
 //   families.bin    one int8 row per family (see src/lib/table.ts)
 //   shards/<f>.bin  one int8 row per species in family f
-//   shards/<f>.json [[scientific, common, inatId], ...], row-aligned with the .bin
+//   shards/<f>.json [[scientific, common, inatId, seenIn], ...], row-aligned with the .bin;
+//                   seenIn lists regions.json indices of the countries (and Antarctica) it was recorded in
 //   names.json      [[scientific, common], ...] for every species, in global order (the help page's search)
 //   regions/<id>.bin  species in a country or continent, as varint gaps (src/lib/varint.ts)
 // familyMode: "text" embeds the family's taxonomy string, "mean" averages its species, "mix" adds both.
@@ -16,6 +17,8 @@ import { CACHE, PUBLIC_DATA } from './lib/paths.mjs';
 import { writeTable } from '../src/lib/table.ts';
 import { encodeIndices } from '../src/lib/varint.ts';
 
+/** Bump when a file's shape changes, so the version (and every browser's cache key) changes too. */
+const FORMAT = 2;
 const [key, template = 'tax', familyMode = 'text', outArg] = process.argv.slice(2);
 if (!key) throw new Error('usage: node pack.mjs <fauna|flora> [template] [familyMode] [outDir]');
 const subset = process.env.FW_SUBSET ? new Set(JSON.parse(readFileSync(process.env.FW_SUBSET, 'utf8'))) : null;
@@ -74,21 +77,11 @@ if (existsSync(out)) rmSync(out, { recursive: true });
 mkdirSync(join(out, 'shards'), { recursive: true });
 writeFileSync(join(out, 'families.bin'), writeTable(famRows, DIM));
 writeFileSync(join(out, 'families.json'), JSON.stringify(families));
-families.forEach((f, k) => {
-  const rows = [];
-  const json = [];
-  for (let i = f.offset; i < f.offset + f.count; i++) {
-    rows.push(row(i));
-    json.push([list[i].sci, list[i].common ?? null, list[i].id]);
-  }
-  writeFileSync(join(out, 'shards', `${k}.bin`), writeTable(rows, DIM));
-  writeFileSync(join(out, 'shards', `${k}.json`), JSON.stringify(json));
-});
-writeFileSync(join(out, 'names.json'), JSON.stringify(list.map((r) => (r.common ? [r.sci, r.common] : [r.sci]))));
-
 // Regions: countries from fetch-regions, continents as the union of their countries (Antarctica fetched directly).
 const regionDir = join(CACHE, 'regions');
 const regions = [];
+/** Region id -> the set of species indices seen there, for the per-species "seen in" lists. */
+const seenSets = new Map();
 if (existsSync(join(regionDir, 'countries.json')) && !subset) {
   const index = new Map(list.map((r, i) => [r.id, i]));
   const countries = JSON.parse(readFileSync(join(regionDir, 'countries.json'), 'utf8'));
@@ -108,15 +101,37 @@ if (existsSync(join(regionDir, 'countries.json')) && !subset) {
     if (!set.size) continue;
     for (const i of set) unions.get(c.continent).add(i);
     regions.push({ id: c.id, name: c.name, continent: c.continent, count: write(c.id, set) });
+    seenSets.set(c.id, set);
   }
   const ant = join(regionDir, `97390-${key}.json`);
   if (existsSync(ant)) for (const id of JSON.parse(readFileSync(ant, 'utf8'))) { const i = index.get(id); if (i !== undefined) unions.get(97390).add(i); }
   for (const [id, set] of unions) if (set.size) regions.push({ id, name: CONT[id], continent: null, count: write(id, set) });
+  // Antarctica has no countries: its own list is what the map shades.
+  if (unions.get(97390).size) seenSets.set(97390, unions.get(97390));
   regions.sort((a, b) => a.name.localeCompare(b.name));
   writeFileSync(join(out, 'regions.json'), JSON.stringify(regions));
 }
 
-const version = createHash('sha256').update(JSON.stringify([template, familyMode, list.map((r) => r.id)])).digest('hex').slice(0, 12);
+// Per species: the regions.json indices of every country (and Antarctica) it has been seen in.
+const seen = list.map(() => []);
+regions.forEach((r, ri) => {
+  const set = seenSets.get(r.id);
+  if (set) for (const i of set) seen[i].push(ri);
+});
+
+families.forEach((f, k) => {
+  const rows = [];
+  const json = [];
+  for (let i = f.offset; i < f.offset + f.count; i++) {
+    rows.push(row(i));
+    json.push([list[i].sci, list[i].common ?? null, list[i].id, seen[i]]);
+  }
+  writeFileSync(join(out, 'shards', `${k}.bin`), writeTable(rows, DIM));
+  writeFileSync(join(out, 'shards', `${k}.json`), JSON.stringify(json));
+});
+writeFileSync(join(out, 'names.json'), JSON.stringify(list.map((r) => (r.common ? [r.sci, r.common] : [r.sci]))));
+
+const version = createHash('sha256').update(JSON.stringify([FORMAT, template, familyMode, list.map((r) => r.id)])).digest('hex').slice(0, 12);
 writeFileSync(join(out, 'meta.json'), JSON.stringify({
   kingdom: key, version, count: list.length, families: families.length, dim: DIM, template, familyMode,
   regions: regions.length, builtAt: new Date().toISOString().slice(0, 10),

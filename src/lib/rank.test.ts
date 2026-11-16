@@ -72,7 +72,7 @@ describe('helpers', () => {
   });
 
   it('Given a weak top match, when judged, then the verdict is unsure', () => {
-    const g: Guess = { scientific: 'A b', common: null, genus: 'A', family: 'F', order: 'O', class: 'C', inatId: 1, score: 0.4, cosine: 0.5 };
+    const g: Guess = { scientific: 'A b', common: null, genus: 'A', family: 'F', order: 'O', class: 'C', inatId: 1, seenIn: [], score: 0.4, cosine: 0.5 };
     const other: Guess = { ...g, scientific: 'C d', genus: 'C', family: 'G', score: 0.6 };
     expect(verdictOf([g], [g, other]).level).toBe('unsure');
   });

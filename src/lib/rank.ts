@@ -21,8 +21,11 @@ export interface Family {
   count: number;
 }
 
-/** One species row in a shard: [scientific name, common name or null, iNaturalist taxon id]. */
-export type SpeciesRow = [string, string | null, number];
+/**
+ * One species row in a shard: [scientific name, common name or null, iNaturalist taxon id,
+ * regions.json indices of the countries it has been recorded in]. Older packs have no fourth item.
+ */
+export type SpeciesRow = [string, string | null, number, number[]?];
 
 export interface Shard {
   table: Table;
@@ -37,6 +40,8 @@ export interface Guess {
   order: string;
   class: string;
   inatId: number;
+  /** regions.json indices of the countries (and Antarctica) where it has been recorded. */
+  seenIn: number[];
   score: number;
   cosine: number;
 }
@@ -139,11 +144,12 @@ export async function rank(opts: {
     const cos = cosines(feature, shard.table, keep);
     cos.forEach((c, r) => {
       if (!Number.isFinite(c)) return;
-      const [scientific, common, inatId] = shard.rows[r]!;
+      const [scientific, common, inatId, seenIn = []] = shard.rows[r]!;
       cands.push({
         scientific,
         common,
         inatId,
+        seenIn,
         cosine: c,
         genus: scientific.split(' ')[0]!,
         family: fam.name,

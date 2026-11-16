@@ -152,10 +152,10 @@ components:
 
 Every answer reads like a plate in a printed field guide: the visitor's own photo is the plate, framed in white on a cool lavender ground, and the species name faces it across the gutter. A deep violet shell bar holds the brand and the Flora/Fauna halves; below it, the work happens on white plates and ruled columns, the way a guide sets a figure against its text. The world refuses the category default of a drop zone and a rounded result card with a progress bar.
 
-Proof sits beside the claim. The area the model analysed is marked in chartreuse on the photo, repeated as a crop thumbnail beside the name, and joined to it by chartreuse leader lines that draw in when a result lands. Confidence is a fixed five-step ramp, never a free-floating colour. Names carry the serif voice (common name upright, scientific name italic); everything that operates speaks in a plain grotesque. Density is calm: one plate, one facing column, generous gutters.
+Proof sits beside the claim. The area the model analysed is marked in chartreuse on the photo, repeated as a crop thumbnail beside the name, and joined to it by a single chartreuse leader line that draws in when a result lands. Confidence is a fixed five-step ramp, never a free-floating colour. Names carry the serif voice (common name upright, scientific name italic); everything that operates speaks in a plain grotesque. Density is calm: one plate, one facing column, generous gutters.
 
 **Key Characteristics:**
-- Photo as plate, name on the facing column, joined by leader lines.
+- Photo as plate, name on the facing column, joined by one leader line.
 - Deep violet shell, violet controls, chartreuse as the marking colour.
 - Source Serif 4 for names, Public Sans for UI; tabular figures throughout.
 - Square plates, 6px controls, hairline lavender rules, a 2px ink rule heading each data column.
@@ -272,10 +272,10 @@ The shell bar: logo and wordmark (white, 700, 18px) left, tabs centre-left, mode
 The visitor's photo on a pale lavender mat inside a white plate, captioned "Plate 1 · your photo" with the analysis state on the right. Dragging draws a chartreuse box with ink keylines, two square handles and the selection veil; keyboard users press B, then arrows and Shift+arrows. With no photo, the plate holds a dashed Strong Hairline drop area on the ground tone that washes violet on hover or drag.
 
 ### Facing Column (signature)
-Top to bottom: the taxonomy guide-word run over a 2px ink rule; the serif numeral 1, a 112px crop of the analysed area framed in chartreuse with an ink outline and an uppercase caption, then the common name (headline), the scientific name (italic) and a link to compare photos; the five-step ramp (40px by 10px steps), bold percent and chip; then "Other close matches" as hairline-ruled rows with a small ramp (18px by 6px). A newer result fades the old one to 45% while it works.
+Top to bottom: the taxonomy guide-word run over a 2px ink rule; the serif numeral 1, a 112px crop of the analysed area framed in chartreuse with an ink outline and an uppercase caption, then the common name (headline), the scientific name (italic) and a link to compare photos of that species; a small world map (max 460px) of the countries where it has been recorded, seen countries in violet and the rest in the empty-ramp grey, tiny seen places as violet dots; the five-step ramp (40px by 10px steps), bold percent and chip; then "Other close matches" as hairline-ruled rows with a small ramp (18px by 6px). A newer result fades the old one to 45% while it works.
 
-### Leader Lines (signature)
-2px chartreuse lines with a faint ink drop-shadow run from the box's right edge to the crop and to the confidence ramp, with ink-stroked chartreuse dots at both ends. They draw in over 560ms (staggered 120ms) when a result lands, follow the box as it moves, and are not drawn when the layout stacks.
+### Leader Line (signature)
+A 2px chartreuse line with a faint ink drop-shadow runs from the box's right edge to the crop: one line per photo, with ink-stroked chartreuse dots at both ends. It draws in over 560ms when a result lands, follows the box as it moves, and is not drawn when the layout stacks.
 
 ### Notice
 A Notice-toned banner on home (icon, title, line, primary button) and a modal dialog on identify pages, both 6px corners with the warn-line stroke.
