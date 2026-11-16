@@ -1,8 +1,8 @@
 <script lang="ts">
   /**
-   * The signature move: pointer lines, like a field guide plate's, drawn from
-   * the box on the photo to the analysed crop and to the name on the facing
-   * column. They draw in when a result lands and follow the box as it moves.
+   * The signature move: a pointer line, like a field guide plate's, drawn from
+   * the box on the photo to the analysed crop on the facing column. One photo,
+   * one line. It draws in when a result lands and follows the box as it moves.
    */
   interface Props {
     container: HTMLElement | null;

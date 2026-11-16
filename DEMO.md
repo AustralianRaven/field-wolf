@@ -55,7 +55,7 @@ The test set is 20 photos, 10 animals and 10 plants, from every continent: CC0 a
 
 The two that are not named first, shown as the app answers them:
 
-- **Indian Peafowl.** The photo is a head-only close-up on white. FieldWolf says "Not sure" and lists *Pavo cristatus* third.
+- **Indian Peafowl.** The photo is a head-only close-up on white. FieldWolf says "Something in the family Phasianidae", with *Pavo cristatus* among the three names shown.
 - **Pōhutukawa.** FieldWolf says "A kind of *Metrosideros*", with its close relative *M. nervulosa* first and *M. excelsa* second.
 
 Both are honest near-misses rather than confident wrong answers. Run them yourself:

@@ -4,6 +4,7 @@
    * Drag to draw a box. Keyboard: focus the photo, press B for a box, arrows
    * move it, Shift+arrows resize it, Delete clears it.
    */
+  import { imageFromClipboard, isTextTarget } from '../lib/clipboard';
   import { DEFAULT_BOX, boxStyle, dragBox, normaliseBox, nudgeBox, type Box } from '../lib/region';
 
   interface Props {
@@ -36,6 +37,15 @@
     if (f && f.type.startsWith('image/')) onFile(f);
   }
 
+  /** Ctrl+V / Cmd+V anywhere on the page loads a copied image, unless the paste is into a text field. */
+  function paste(e: ClipboardEvent): void {
+    if (isTextTarget(e.target)) return;
+    const f = imageFromClipboard(e.clipboardData);
+    if (!f) return;
+    e.preventDefault();
+    onFile(f);
+  }
+
   function down(e: PointerEvent): void {
     if (e.button !== 0 || !img) return;
     e.preventDefault();
@@ -66,6 +76,8 @@
     }
   }
 </script>
+
+<svelte:window onpaste={paste} />
 
 <section class="plate" aria-label="Your photo">
   {#if photoUrl}
@@ -112,7 +124,7 @@
         <rect x="6" y="10" width="36" height="28" rx="2" /><circle cx="17" cy="20" r="3.5" /><path d="m6 34 11-10 8 7 6-5 11 9" />
       </svg>
       <strong>Add a photo of a {noun}</strong>
-      <span>Drop it here or click to choose one. JPEG, PNG, WebP or HEIC your browser can open.</span>
+      <span>Drop it here, paste it, or click to choose one. JPEG, PNG, WebP or HEIC your browser can open.</span>
     </div>
   {/if}
   <input bind:this={input} class="visually-hidden" type="file" accept="image/*" aria-label="Choose a photo" data-testid="photo-input" onchange={(e) => pick((e.currentTarget as HTMLInputElement).files)} />

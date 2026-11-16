@@ -26,8 +26,6 @@
   let work = $state<HTMLElement | null>(null);
   let boxEl = $state<HTMLElement | null>(null);
   let thumbEl = $state<HTMLElement | null>(null);
-  let nameEl = $state<HTMLElement | null>(null);
-  let confEl = $state<HTMLElement | null>(null);
   let timer: ReturnType<typeof setTimeout> | undefined;
 
   const regionName = $derived(regions.find((r) => r.id === region)?.name ?? 'Everywhere');
@@ -109,12 +107,11 @@
     {box}
     hasPhoto={Boolean(photo)}
     {regionName}
+    {regions}
     bind:thumbEl
-    bind:nameEl
-    bind:confEl
   />
   {#if analyser.state === 'done'}
-    <LeaderLines container={work} from={boxEl} to={[thumbEl, confEl]} drawKey={analyser.ranking} />
+    <LeaderLines container={work} from={boxEl} to={[thumbEl]} drawKey={analyser.ranking} />
   {/if}
 </main>
 

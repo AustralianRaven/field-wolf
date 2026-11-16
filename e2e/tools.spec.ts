@@ -6,7 +6,7 @@ test.describe('Box, region and species list', () => {
   test('Given an identified photo, when I draw a box and narrow the region to Australia, then it re-identifies within the box and region', async ({ page }) => {
     await page.goto('fauna');
     await identify(page, kookaburra);
-    await expect(page.locator('.leaders line'), 'Then leader lines should point from the photo to the answer').toHaveCount(2);
+    await expect(page.locator('.leaders line'), 'Then one leader line should point from the photo to the answer').toHaveCount(1);
 
     const img = page.locator('.stage img');
     const b = (await img.boundingBox())!;
